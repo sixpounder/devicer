@@ -70,4 +70,5 @@ The output is an object holding informations about the user agent string. An exa
   platform: 'Macintosh; Intel Mac OS X 10_11_5',
   build: '',
   engine: 'AppleWebKit/537.36 (KHTML, like Gecko)',
-  browser: 'Chrome/50.0.2661.102' }```
+  browser: 'Chrome/50.0.2661.102' }
+```
