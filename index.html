@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Devicer by sixpounder</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Devicer</h1>
+          <h2>Easily detect client device informations over http requests</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/sixpounder/devicer/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/sixpounder/devicer/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/sixpounder/devicer" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="devicer" class="anchor" href="#devicer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DeviceR</h1>
+
+<p>Easily get informations about client devices over http requests.</p>
+
+<h3>
+<a id="install-and-quick-usage" class="anchor" href="#install-and-quick-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install and quick usage</h3>
+
+<div class="highlight highlight-source-shell"><pre>npm install --save devicer</pre></div>
+
+<p>Test it if you want to</p>
+
+<div class="highlight highlight-source-shell"><pre>npm <span class="pl-c1">test</span></pre></div>
+
+<p>In any NodeJS module</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> devicer <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>devicer<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> details <span class="pl-k">=</span> <span class="pl-smi">devicer</span>.<span class="pl-en">parseUserAgent</span>(userAgentString);
+
+<span class="pl-c">// or, if you have an http request object</span>
+details <span class="pl-k">=</span> <span class="pl-smi">devicer</span>.<span class="pl-en">detect</span>(req);</pre></div>
+
+<p>Connect/Express middleware (see below for configuration options)</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> devicer <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>devicer<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">// req.device will be available after this middleware</span>
+<span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-smi">devicer</span>.<span class="pl-en">middleware</span>());</pre></div>
+
+<h3>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API</h3>
+
+<h4>
+<a id="devicerdetectrequest" class="anchor" href="#devicerdetectrequest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>devicer.detect(request)</h4>
+
+<p>Searches the request object for a <code>User-Agent</code> header and parses it</p>
+
+<p><strong>returns</strong>: <code>object</code></p>
+
+<h4>
+<a id="devicerparseuseragentuseragentstring" class="anchor" href="#devicerparseuseragentuseragentstring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>devicer.parseUserAgent(userAgentString)</h4>
+
+<p>Parses the <code>userAgentString</code></p>
+
+<p><strong>returns</strong>: <code>object</code></p>
+
+<h3>
+<a id="devicermiddlewareoptions" class="anchor" href="#devicermiddlewareoptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>devicer.middleware(options)</h3>
+
+<p>A middleware to use in connect/express applications.
+You may pass an <code>options</code> object to configure the middleware behaviour.
+The following example also illustrates the default behaviour.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> devicer <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>devicer<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>);
+
+<span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-smi">devicer</span>.<span class="pl-en">middleware</span>({
+  <span class="pl-c">// The property name on req that will hold the parse result</span>
+  propertyName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>device<span class="pl-pds">'</span></span>,
+
+  <span class="pl-c">// If an error occurs</span>
+  <span class="pl-en">onError</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">req</span>, <span class="pl-smi">res</span>, <span class="pl-smi">next</span>) {
+    <span class="pl-en">next</span>(err);
+  },
+
+  <span class="pl-c">// If parse is succesfull</span>
+  <span class="pl-en">onSuccess</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>, <span class="pl-smi">next</span>) {
+    <span class="pl-en">next</span>(); <span class="pl-c">// no-op</span>
+  }
+}));</pre></div>
+
+<h2>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h2>
+
+<p>The output is an object holding informations about the user agent string. The <code>match</code> property specifies the string matched as a valid user agent.</p>
+
+<p>An example with Chrome on OSX:</p>
+
+<div class="highlight highlight-source-js"><pre>{ match<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36<span class="pl-pds">'</span></span>,
+  compliance<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Mozilla/5.0<span class="pl-pds">'</span></span>,
+  platform<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Macintosh; Intel Mac OS X 10_11_5<span class="pl-pds">'</span></span>,
+  build<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,
+  engine<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>AppleWebKit/537.36 (KHTML, like Gecko)<span class="pl-pds">'</span></span>,
+  additional<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Chrome/50.0.2661.102<span class="pl-pds">'</span></span> }</pre></div>
+        </section>
+
+        <footer>
+          Devicer is maintained by <a href="https://github.com/sixpounder">sixpounder</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
