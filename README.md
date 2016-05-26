@@ -70,7 +70,9 @@ app.use(devicer.middleware({
 ```
 
 ## Output
-The output is an object holding informations about the user agent string. An example with Chrome on OSX:
+The output is an object holding informations about the user agent string. The ```match``` property specifies the string matched as a valid user agent.
+
+An example with Chrome on OSX:
 
 ```javascript
 { match: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
@@ -78,5 +80,5 @@ The output is an object holding informations about the user agent string. An exa
   platform: 'Macintosh; Intel Mac OS X 10_11_5',
   build: '',
   engine: 'AppleWebKit/537.36 (KHTML, like Gecko)',
-  browser: 'Chrome/50.0.2661.102' }
+  additional: 'Chrome/50.0.2661.102' }
 ```
