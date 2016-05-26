@@ -8,11 +8,19 @@ Easily get informations about client devices over http requests.
 npm install --save devicer
 ```
 
+Test it if you want to
+```bash
+npm test
+```
+
 In any NodeJS module
 
 ```javascript
 var devicer = require('devicer');
-var details = devicer(userAgentString);
+var details = devicer.parseUserAgent(userAgentString);
+
+// or, if you have an http request object
+details = devicer.detect(req);
 ```
 
 Connect/Express middleware (see below for configuration options)
@@ -65,7 +73,7 @@ app.use(devicer.middleware({
 The output is an object holding informations about the user agent string. An example with Chrome on OSX:
 
 ```javascript
-{ original: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
+{ match: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
   compliance: 'Mozilla/5.0',
   platform: 'Macintosh; Intel Mac OS X 10_11_5',
   build: '',
