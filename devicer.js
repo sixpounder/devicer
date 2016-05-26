@@ -36,12 +36,14 @@ Devicer.prototype.parseUserAgent = function(userAgent) {
 
 // Connect compliant middleware
 Devicer.prototype.middleware = function(options) {
+  var self = this;
+  options = options || {};
   options.propertyName = options.propertyName ? options.propertyName : 'device';
-  options.propertyName = options.onError ? options.onError : function(err, req, res, next) {
-    next(err);
+  options.onError = options.onError ? options.onError : function(err, req, res, next) {
+    return next(err);
   };
-  options.propertyName = options.onSuccess ? options.onSuccess : function(req, res, next) {
-    next();
+  options.onSuccess = options.onSuccess ? options.onSuccess : function(req, res, next) {
+    return next();
   };
 
   return function(req, res, next) {

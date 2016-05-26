@@ -56,4 +56,48 @@ describe("devicer", function() {
     });
   });
 
+  describe('middleware', function() {
+    it('correctly handles middleware chain', function() {
+      var fn = devicer.middleware();
+      var MockReq = function() {
+        this.get = function() {
+          return android;
+        };
+      };
+      var req = new MockReq();
+
+      var next = function() {
+        return "OK";
+      };
+
+      assert.equal("function", typeof fn);
+      assert.equal("OK", fn(req, {}, next));
+    });
+
+    it('registers custom property name on request object', function() {
+      var MockReq = function() {
+        this.get = function() {
+          return android;
+        };
+      };
+      var req = new MockReq();
+
+      var next = function() {
+        return "OK";
+      };
+
+      var fn = devicer.middleware({
+        propertyName: 'myShit',
+        onSuccess: function(req, res, next) {
+          assert.notEqual(undefined, req.myShit);
+        }
+      });
+
+      assert.equal("function", typeof fn);
+
+      fn(req, {}, next);
+
+    });
+  });
+
 });
