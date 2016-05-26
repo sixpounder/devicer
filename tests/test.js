@@ -8,7 +8,7 @@ var ipad = "Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWe
 var iphone = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B329 Safari/8536.25";
 
 describe("devicer", function() {
-  describe('basic funcionalities', function() {
+  describe('basic functionalities', function() {
     it('parses a valid user agent', function() {
       var obj = devicer.parseUserAgent(chromeOnOsx);
       assert.notEqual(null, obj);
