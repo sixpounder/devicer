@@ -1,0 +1,20 @@
+{
+  "name": "devicer",
+  "version": "0.0.1",
+  "description": "Easily detect client device informations over http requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "device",
+    "user",
+    "agent",
+    "mobile",
+    "desktop",
+    "request",
+    "http"
+  ],
+  "author": "sixpounder",
+  "license": "GPL-2.0"
+}
