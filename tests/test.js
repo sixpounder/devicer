@@ -11,6 +11,7 @@ var iphone = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_3 like Mac OS X) AppleWebKi
 var edge = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246";
 var ie   = "Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko";
 var firefox = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
+var opera = "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16";
 
 describe("devicer", function() {
   describe('basic functionalities', function() {
@@ -89,6 +90,12 @@ describe("devicer", function() {
       var obj = devicer.parseUserAgent(chromeOnOsx);
       assert.notEqual(null, obj);
       assert.equal(true, obj.engine.isChrome());
+    });
+
+    it('correctly detects Opera', function() {
+      var obj = devicer.parseUserAgent(opera);
+      assert.notEqual(null, obj);
+      assert.equal(true, obj.engine.isOpera());
     });
   });
 

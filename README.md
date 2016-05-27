@@ -2,6 +2,8 @@
 
 Easily get informations about client devices over http requests.
 
+**We are adding more detections over time, there is a lot of stuff to keep track of.**
+
 ### Install and quick usage
 
 ```bash
