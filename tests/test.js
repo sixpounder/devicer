@@ -13,24 +13,29 @@ describe("devicer", function() {
       var obj = devicer.parseUserAgent(chromeOnOsx);
       assert.notEqual(null, obj);
       assert.notEqual("", obj.compliance);
+      assert.equal(true, obj.isDesktop());
+      assert.equal(true, obj.engine.isChrome());
     });
 
     it('parses an android user agent', function() {
       var obj = devicer.parseUserAgent(android);
       assert.notEqual(null, obj);
       assert.notEqual("", obj.compliance);
+      assert.equal(true, obj.isAndroid());
     });
 
     it('parses an ipad user agent', function() {
       var obj = devicer.parseUserAgent(ipad);
       assert.notEqual(null, obj);
       assert.notEqual("", obj.compliance);
+      assert.equal(true, obj.isIPad());
     });
 
     it('parses an iphone user agent', function() {
       var obj = devicer.parseUserAgent(iphone);
       assert.notEqual(null, obj);
       assert.notEqual("", obj.compliance);
+      assert.equal(true, obj.isIPhone());
     });
   });
 
@@ -41,7 +46,7 @@ describe("devicer", function() {
       assert.notEqual("", obj.compliance);
       assert.notEqual("", obj.platform);
       assert.notEqual(undefined, obj.build);
-      assert.notEqual("", obj.engine);
+      assert.notEqual(undefined, obj.engine);
       assert.notEqual("", obj.additional);
     });
 
@@ -51,7 +56,7 @@ describe("devicer", function() {
       assert.notEqual("", obj.compliance);
       assert.notEqual("", obj.platform);
       assert.notEqual("", obj.build);
-      assert.notEqual("", obj.engine);
+      assert.notEqual(undefined , obj.engine);
       assert.notEqual("", obj.additional);
     });
   });

@@ -1,1 +1,1 @@
-module.exports = require('./devicer');
+module.exports = require('./lib/devicer');

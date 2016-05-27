@@ -32,7 +32,7 @@ var app = require('express');
 app.use(devicer.middleware());
 ```
 
-### API
+# DeviceR API
 
 #### devicer.detect(request)
 Searches the request object for a ```User-Agent``` header and parses it
@@ -69,16 +69,39 @@ app.use(devicer.middleware({
 }));
 ```
 
-## Output
-The output is an object holding informations about the user agent string. The ```match``` property specifies the string matched as a valid user agent.
+# Output API
 
-An example with Chrome on OSX:
+## Class Device
+A Device instance is what a call to ```detect```, ```parseUserAgent``` methods returns and the DeviceR middleware sets on the request ```device``` property.
 
-```javascript
-{ match: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
-  compliance: 'Mozilla/5.0',
-  platform: 'Macintosh; Intel Mac OS X 10_11_5',
-  build: '',
-  engine: 'AppleWebKit/537.36 (KHTML, like Gecko)',
-  additional: 'Chrome/50.0.2661.102' }
-```
+### Properties
+
+- ```Device.match``` The user agent string matched as valid
+- ```Device.compliance``` The user agent compliance level. Usually "Mozilla/5.0" in modern browsers
+- ```Device.platform``` The platform on which the client is running
+- ```Device.build``` The platform build, if specified
+- ```Device.additional``` Any further specification on the user agent
+- ```Device.engine``` A ```BrowserEngine``` instance
+
+### Methods
+- ```Device#isIPad``` Returns ```true``` if the device is likely to be an iPad
+- ```Device#isIPhone``` Returns ```true``` if the device is likely to be an iPhone
+- ```Device#isAndroid``` Returns ```true``` if the device is likely to be an android device
+- ```Device#isDesktop``` Returns ```true``` if the device is likely to be a desktop computer
+- ```Device#isMobile``` Returns ```true``` if the device is likely to be a mobile device
+- ```Device#isWin``` Returns ```true``` if the device is running Windows
+- ```Device#isOSX``` Returns ```true``` if the device is running MAC OSX
+- ```Device#isLinux``` Returns ```true``` if the device is running Linux
+
+## Class BrowserEngine
+
+### Properties
+- ```BrowserEngine.name``` The browser name string
+
+### Methods
+- ```BrowserEngine#isChrome``` Returns ```true``` if it is a Chrome browser
+- ```BrowserEngine#isWebKit``` Returns ```true``` if it is a WebKit based browser
+- ```BrowserEngine#isFirefox``` Returns ```true``` if it is a Firefox browser
+- ```BrowserEngine#isOpera``` Returns ```true``` if it is an Opera browser
+- ```BrowserEngine#isSafari``` Returns ```true``` if it is a Safari browser
+- ```BrowserEngine#isIE``` Returns ```true``` if it is an Internet Explorer or Microsoft Edge browser
