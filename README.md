@@ -1,3 +1,4 @@
+![Buid status](https://travis-ci.org/sixpounder/devicer.svg?branch=master)
 # DeviceR
 
 Easily get informations about client devices over http requests.
