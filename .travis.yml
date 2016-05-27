@@ -8,5 +8,6 @@ node_js:
 env:
   global:
     - NPM_VERSION="^2.0.0"
+install: npm install
 notifications:
   email: false
