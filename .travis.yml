@@ -6,8 +6,15 @@ node_js:
   - "4"
   - "4.2"
 env:
+  - CXX=g++-4.8
   global:
     - NPM_VERSION="^2.0.0"
 install: npm install
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 notifications:
   email: false
