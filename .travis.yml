@@ -1,0 +1,12 @@
+# .travis.yml
+language: node_js
+node_js:
+  - "5"
+  - "5.1"
+  - "4"
+  - "4.2"
+env:
+  global:
+    - NPM_VERSION="^2.0.0"
+notifications:
+  email: false
