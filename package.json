@@ -16,7 +16,7 @@
     "http"
   ],
   "devDependencies": {
-    "simple-mocha": "@0.0.9"
+    "simple-mocha": "0.0.9"
   },
   "author": "sixpounder",
   "license": "GPL-2.0"
